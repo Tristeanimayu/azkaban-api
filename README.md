@@ -770,5 +770,5 @@ public class AzkabanApiConfig {
 
 # 6 总结
 
-之前写过两篇关于Azkaban的文章，都是关于使用Java调用Azkaban的API。其中有同学问具体代码，这次把重构后的代码提交到了github上了，项目地址：https://github.com/shirukai/azkaban-java-api.git。
+之前写过两篇关于Azkaban的文章，都是关于使用Java调用Azkaban的API。其中有同学问具体代码，这次把重构后的代码提交到了github上了，项目地址：https://github.com/shirukai/azkaban-java-api.git
 # azkaban-api
