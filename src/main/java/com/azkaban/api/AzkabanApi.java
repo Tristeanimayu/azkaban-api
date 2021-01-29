@@ -19,7 +19,7 @@ public interface AzkabanApi {
     BaseResponse createProject(String name, String desc);
 
     /**
-     * 删除项目 API
+     * 删除项目 API,目前删除项目无任何响应
      *
      * @param name 项目名称
      * @return BaseResponse
@@ -122,7 +122,7 @@ public interface AzkabanApi {
      * 查询定时任务
      *
      * @param projectId 项目ID
-     * @param flowId    Flow ID
+     * @param flowId    Flow ID,实际为flow名称
      * @return FetchScheduleResponse
      */
     FetchScheduleResponse fetchSchedule(String projectId, String flowId);

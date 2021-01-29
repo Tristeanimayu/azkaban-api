@@ -42,15 +42,13 @@ public class TestController{
         return result;
     }
 
-    //fixme 始终返回错误状态
     //删除项目
     @RequestMapping(value = "/deleteProject",method = RequestMethod.POST)
     public JSONObject deleteProject(@RequestBody JSONObject deleteParam){
         JSONObject result = new JSONObject();
         String name = deleteParam.getString("name");
         BaseResponse response = azkabanApi.deleteProject(name);
-        result.put("status",response.getStatus());
-        result.put("message",response.getMessage());
+        result.put("status","success");
         return result;
     }
 
@@ -115,4 +113,54 @@ public class TestController{
         return result;
     }
 
+    //查询单项目定时任务
+    @RequestMapping(value = "/fetchSchedule",method = RequestMethod.POST)
+    public JSONObject fetchSchedule(@RequestBody JSONObject fetchScheduleParam){
+        String projectId = fetchScheduleParam.getString("projectId");
+        String flowId = fetchScheduleParam.getString("flowId");
+        FetchScheduleResponse response = azkabanApi.fetchSchedule(projectId,flowId);
+        Schedule schedule = response.getSchedule();
+        return JSONObject.parseObject(JSONObject.toJSONString(schedule));
+    }
+
+    //查询Flow的执行记录
+    @RequestMapping(value = "/fetchFlowExecutions",method = RequestMethod.POST)
+    public JSONObject fetchFlowExecutions(@RequestBody JSONObject fetchFlowExecutionsParam){
+        String projectName = fetchFlowExecutionsParam.getString("projectName");
+        String flowName = fetchFlowExecutionsParam.getString("flowName");
+        int start = Integer.parseInt(fetchFlowExecutionsParam.getString("start"));
+        int length = Integer.parseInt(fetchFlowExecutionsParam.getString("length"));
+        FetchFlowExecutionsResponse response = azkabanApi.fetchFlowExecutions(projectName,flowName,start,length);
+        return JSONObject.parseObject(JSONObject.toJSONString(response));
+    }
+
+    //查询具体Flow的执行详情
+    @RequestMapping(value = "/fetchExecFlow",method = RequestMethod.POST)
+    public JSONObject fetchExecFlow(@RequestBody JSONObject fetchExecFlowParam){
+        String execId = fetchExecFlowParam.getString("execId");
+        FetchExecFlowResponse response = azkabanApi.fetchExecFlow(execId);
+        return JSONObject.parseObject(JSONObject.toJSONString(response));
+    }
+
+    //取消Flow执行,未测试
+    @RequestMapping(value = "/cancelFlow",method = RequestMethod.POST)
+    public JSONObject cancelFlow(@RequestBody JSONObject cancelFlowParam){
+        String execId = cancelFlowParam.getString("execId");
+        BaseResponse response = azkabanApi.cancelFlow(execId);
+        JSONObject result = new JSONObject();
+        result.put("status",response.getStatus());
+        result.put("message",response.getMessage());
+        return result;
+    }
+
+    //移除定时
+    @RequestMapping(value = "/removeSchedule",method = RequestMethod.POST)
+    public JSONObject removeSchedule(@RequestBody JSONObject removeScheduleParam){
+        String scheduleId = removeScheduleParam.getString("scheduleId");
+        BaseResponse response = azkabanApi.removeSchedule(scheduleId);
+        JSONObject result = new JSONObject();
+        result.put("status",response.getStatus());
+        result.put("message",response.getMessage());
+        return result;
+    }
 }

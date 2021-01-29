@@ -40,7 +40,6 @@ public class ResponseHandler {
         return handle(request, BaseResponse.class);
     }
 
-
     public static BaseResponse handle(String content) {
         return handle(content, BaseResponse.class);
     }

@@ -7,5 +7,12 @@ package com.azkaban.azkabanResponse;
 public class FetchScheduleResponse extends BaseResponse {
     private Schedule schedule;
 
+    public Schedule getSchedule() {
+        return schedule;
+    }
+
+    public void setSchedule(Schedule schedule) {
+        this.schedule = schedule;
+    }
 }
 
